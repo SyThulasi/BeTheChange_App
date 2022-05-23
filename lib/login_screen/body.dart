@@ -2,6 +2,7 @@ import 'package:be_the_change/componnents/already_have_an_account_acheck.dart';
 import 'package:be_the_change/componnents/rounded_input_field.dart';
 import 'package:be_the_change/screen/blank_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:be_the_change/welcome/background.dart';
 import 'package:be_the_change/componnents/rounded_password_field.dart';
@@ -10,16 +11,19 @@ import 'package:be_the_change/login_screen/login_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../constants.dart';
 
-// firebase
-final _auth = FirebaseAuth.instance;
-String? emailID;
-String? password;
-final _formKey = GlobalKey<FormState>();
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
+  @override
+ _BodyState createState() => _BodyState();
+}
+class _BodyState extends State<Body> {
 
+  String? emailID;
+  String? password;
+  final _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +92,22 @@ class Body extends StatelessWidget {
               print("***************************************************");
               print(emailID);
               print(password);
-              signIn(emailID!, password!);
+              try{
+                final user = _auth.signInWithEmailAndPassword(email: emailID!, password: password!);
+                if(user != null){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const BlankScreen();
+                      },
+                    ),
+                  );
+                }
+              }
+              catch (e){
+                print(e);
+              }
             },
             length: size.width * 0.4,
           ),
@@ -107,56 +126,56 @@ class Body extends StatelessWidget {
           ),
         ],
       ),
+
     );
   }
-
-
-// login function
-  void signIn(String email, String password) async {
-
-    String? errorMessage;
-    print("1111111111111111111111111111111111111111111111111");
-    print(email + password);
-    if (_formKey.currentState!.validate()) {
-
-      try {
-        await _auth
-            .signInWithEmailAndPassword(email: email, password: password)
-            .then((uid) =>
-        {
-          Fluttertoast.showToast(msg: "Login Successful"),
-
-        });
-
-      } on FirebaseAuthException catch (error) {
-        switch (error.code) {
-          case "invalid-email":
-            errorMessage = "Your email address appears to be malformed.";
-
-            break;
-          case "wrong-password":
-            errorMessage = "Your password is wrong.";
-            break;
-          case "user-not-found":
-            errorMessage = "User with this email doesn't exist.";
-            break;
-          case "user-disabled":
-            errorMessage = "User with this email has been disabled.";
-            break;
-          case "too-many-requests":
-            errorMessage = "Too many requests";
-            break;
-          case "operation-not-allowed":
-            errorMessage = "Signing in with Email and Password is not enabled.";
-            break;
-          default:
-            errorMessage = "An undefined Error happened.";
-        }
-        Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
-      }
-    }
-
-  }
 }
+
+// // login function
+//   void signIn(String email, String password) async {
+//
+//     String? errorMessage;
+//     if (_formKey.currentState!.validate()) {
+//       print("1111111111111111111111111111111111111111111111111");
+//       print(email + password);
+//       try {
+//         await _auth
+//             .signInWithEmailAndPassword(email: email, password: password)
+//             .then((uid) =>
+//         {
+//           Fluttertoast.showToast(msg: "Login Successful"),
+//
+//         });
+//
+//       } on FirebaseAuthException catch (error) {
+//         switch (error.code) {
+//           case "invalid-email":
+//             errorMessage = "Your email address appears to be malformed.";
+//
+//             break;
+//           case "wrong-password":
+//             errorMessage = "Your password is wrong.";
+//             break;
+//           case "user-not-found":
+//             errorMessage = "User with this email doesn't exist.";
+//             break;
+//           case "user-disabled":
+//             errorMessage = "User with this email has been disabled.";
+//             break;
+//           case "too-many-requests":
+//             errorMessage = "Too many requests";
+//             break;
+//           case "operation-not-allowed":
+//             errorMessage = "Signing in with Email and Password is not enabled.";
+//             break;
+//           default:
+//             errorMessage = "An undefined Error happened.";
+//         }
+//         Fluttertoast.showToast(msg: errorMessage!);
+//         print(error.code);
+//       }
+//     }
+//
+//   }
+// }
 
