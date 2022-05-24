@@ -71,8 +71,8 @@ class _AnimatedWelcomePageState extends State<AnimatedWelcomePage> {
                     ),
                     const SizedBox(height: 15),
                     FadeInUp(
-                      duration: const Duration(milliseconds: 1000),
-                      delay: const Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 750),
+                      delay: const Duration(milliseconds: 750),
                       from: 60,
                       child: Text(
                         'And save the world.',
@@ -92,8 +92,8 @@ class _AnimatedWelcomePageState extends State<AnimatedWelcomePage> {
                     //   color: Colors.grey,
                     // )
                     FadeInUp(
-                      duration: const Duration(milliseconds: 1000),
-                      delay: const Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 750),
+                      delay: const Duration(milliseconds: 750),
                       from: 50,
                       child: Align(
                         alignment: Alignment.bottomRight,

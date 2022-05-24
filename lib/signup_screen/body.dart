@@ -1,5 +1,6 @@
 import 'package:be_the_change/componnents/already_have_an_account_acheck.dart';
 import 'package:be_the_change/componnents/rounded_input_field.dart';
+import 'package:be_the_change/services/firebase_auth_methods.dart';
 import 'package:be_the_change/signup_screen/social_icon.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,6 +13,7 @@ import 'package:be_the_change/login_screen/login_screen.dart';
 import 'package:be_the_change/screen/blank_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'userModel.dart';
+import 'package:be_the_change/services/firebase_auth_methods.dart';
 
 import '../constants.dart';
 import 'or_divider.dart';
@@ -27,10 +29,17 @@ class _BodyState extends State<Body> {
   final _auth = FirebaseAuth.instance;
   String? name, email, password, reTypePassword;
 
+  void signUpUser() async{
+    print("***************************************");
+    FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(email: email!, password: password!,context: context);
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Background(
       child: SingleChildScrollView(
         reverse: true,
@@ -85,24 +94,26 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "SIGN UP",
               color: kPrimaryColor,
-              press: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return BlankScreen();
-                          },
-                        ),
-                      );
-                },
+              press: signUpUser,
+              // press: () {
+              //   print("*********  "+ email! + "  "+ password!+"  ********");
+              //   signUpUser;
+              //   print("*********  "+ email! + "  "+ password!+"  ********");
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) {
+              //         return BlankScreen();
+              //       },
+              //     ),
+              //   );
+              // },
               length: size.width * 0.4,
             ),
             SizedBox(height: size.height * 0.01),
             AlreadyHaveAnAccountCheck(
               login: false,
-              press: () {
-                Navigator.pushNamed(context, LoginScreen().id);
-              },
+              press: () {},
             ),
             OrDivider(),
             Row(
@@ -110,16 +121,22 @@ class _BodyState extends State<Body> {
               children: <Widget>[
                 SocalIcon(
                   iconSrc: "assets/icons/facebook.svg",
-                  press: () {},
+                  press: () {
+                    Navigator.pushNamed(context, BlankScreen().id);
+                  },
 
                 ),
                 SocalIcon(
                   iconSrc: "assets/icons/twitter.svg",
-                  press: () {},
+                  press: () {
+                    Navigator.pushNamed(context, BlankScreen().id);
+                  },
                 ),
                 SocalIcon(
                   iconSrc: "assets/icons/google-plus.svg",
-                  press: () {},
+                  press: () {
+                    Navigator.pushNamed(context, BlankScreen().id);
+                  },
                 ),
               ],
             )
@@ -127,22 +144,5 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
-  }
-  postDetailsToFirestore() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
-    User? user = _auth.currentUser;
-
-    UserModel userModel = UserModel();
-
-    userModel.email = user!.email;
-    userModel.name = name;
-    userModel.userID = user.uid;
-
-    await firebaseFirestore
-    .collection("User")
-    .doc(user.uid)
-    .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account Create Sucessfully");
   }
 }
