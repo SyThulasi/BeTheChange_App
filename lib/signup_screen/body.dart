@@ -11,7 +11,6 @@ import 'package:be_the_change/componnents/rounded_button.dart';
 import 'package:be_the_change/login_screen/login_screen.dart';
 import 'package:be_the_change/screen/blank_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'userModel.dart';
 
 import '../constants.dart';
 import 'or_divider.dart';
@@ -24,13 +23,15 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final _auth = FirebaseAuth.instance;
+
   String? name, email, password, reTypePassword;
 
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Background(
       child: SingleChildScrollView(
         reverse: true,
@@ -85,32 +86,17 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "SIGN UP",
               color: kPrimaryColor,
-              press: () async{
-                print("Name : "+name!+" "+email!+" "+password!);
-                if (password == reTypePassword) {
-                  try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email!, password: password!);
-                    if (newUser != null) {
-                      postDetailsToFirestore();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const BlankScreen();
-                          },
-                        ),
-                      );
-                    }
-                  }
-                  catch (e) {
-                    print(e);
-                  }
-                }
-                else{
-
-                }
-    },
+              press: () async {
+                print("Name : " + name! + " " + email! + " " + password!);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const BlankScreen();
+                    },
+                  ),
+                );
+              },
               length: size.width * 0.4,
             ),
             SizedBox(height: size.height * 0.01),
@@ -150,22 +136,5 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
-  }
-  postDetailsToFirestore() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
-    User? user = _auth.currentUser;
-
-    UserModel userModel = UserModel();
-
-    userModel.email = user!.email;
-    userModel.name = name;
-    userModel.userID = user.uid;
-
-    await firebaseFirestore
-    .collection("User")
-    .doc(user.uid)
-    .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account Create Sucessfully");
   }
 }
