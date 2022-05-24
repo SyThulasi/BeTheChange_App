@@ -5,6 +5,8 @@ import 'package:be_the_change/animated_welcome/animated_welcome_page.dart';
 import 'package:be_the_change/constants.dart';
 
 class SplashScreen extends StatefulWidget {
+
+  String id =  'SplashScreen';
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -18,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const AnimatedWelcomePage())));
+                builder: (context) =>  AnimatedWelcomePage())));
   }
 
   @override

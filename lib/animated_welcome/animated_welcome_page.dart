@@ -6,7 +6,8 @@ import 'package:be_the_change/constants.dart';
 import 'package:be_the_change/animated_welcome/background.dart';
 
 class AnimatedWelcomePage extends StatefulWidget {
-  const AnimatedWelcomePage({Key? key}) : super(key: key);
+
+  String id =  'AnimatedWelcomePage';
 
   @override
   _AnimatedWelcomePageState createState() => _AnimatedWelcomePageState();
@@ -99,14 +100,7 @@ class _AnimatedWelcomePageState extends State<AnimatedWelcomePage> {
                         child: TextButton(
                           onPressed: () {
                             // reload the page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const WelcomeScreen();
-                                },
-                              ),
-                            );
+                            Navigator.pushNamed(context, WelcomeScreen().id);
                           },
                           child: const Text(
                             'Start >>',

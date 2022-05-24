@@ -1,6 +1,7 @@
 import 'package:be_the_change/componnents/already_have_an_account_acheck.dart';
 import 'package:be_the_change/componnents/rounded_input_field.dart';
 import 'package:be_the_change/screen/blank_screen.dart';
+import 'package:be_the_change/signup_screen/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -95,37 +96,14 @@ class _BodyState extends State<Body> {
               print("***************************************************");
               print(emailID);
               print(password);
-              try{
-                final user = _auth.signInWithEmailAndPassword(email: emailID!, password: password!);
-                if(user != null){
-                  print('****************User in*********************');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const BlankScreen();
-                      },
-                    ),
-                  );
-                }
-              }
-              catch (e){
-                print(e);
-              }
+              Navigator.pushNamed(context, BlankScreen().id);
             },
             length: size.width * 0.4,
           ),
           SizedBox(height: size.height * 0.02),
           AlreadyHaveAnAccountCheck(
             press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const LoginScreen();
-                  },
-                ),
-              );
+              Navigator.pushNamed(context, SignUpScreen().id);
             },
           ),
         ],

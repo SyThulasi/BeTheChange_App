@@ -25,10 +25,10 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
         GestureDetector(
           onTap: () {
             if(login == true){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+              Navigator.pushNamed(context, SignUpScreen().id);
             }
             else{
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+              Navigator.pushNamed(context, LoginScreen().id);
             }
             },
           child: Text(

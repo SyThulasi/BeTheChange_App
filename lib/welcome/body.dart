@@ -74,14 +74,7 @@ class Body extends StatelessWidget {
               text: "Log In",
               length: size.width * 0.4,
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginScreen();
-                    },
-                  ),
-                );
+                Navigator.pushNamed(context, LoginScreen().id);
               },
               color: kPrimaryColor,
             ),
@@ -94,14 +87,7 @@ class Body extends StatelessWidget {
               length: size.width * 0.4,
               color: kPrimaryColor,
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
-                    },
-                  ),
-                );
+                Navigator.pushNamed(context, SignUpScreen().id);
               },
             ),
           ),

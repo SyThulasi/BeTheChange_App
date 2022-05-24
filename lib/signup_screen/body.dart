@@ -85,46 +85,23 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "SIGN UP",
               color: kPrimaryColor,
-              press: () async{
-                print("Name : "+name!+" "+email!+" "+password!);
-                if (password == reTypePassword) {
-                  try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email!, password: password!);
-                    if (newUser != null) {
-                      postDetailsToFirestore();
+              press: (){
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const BlankScreen();
+                            return BlankScreen();
                           },
                         ),
                       );
-                    }
-                  }
-                  catch (e) {
-                    print(e);
-                  }
-                }
-                else{
-
-                }
-    },
+                },
               length: size.width * 0.4,
             ),
             SizedBox(height: size.height * 0.01),
             AlreadyHaveAnAccountCheck(
               login: false,
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginScreen();
-                    },
-                  ),
-                );
+                Navigator.pushNamed(context, LoginScreen().id);
               },
             ),
             OrDivider(),
