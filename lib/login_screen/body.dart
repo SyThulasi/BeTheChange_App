@@ -31,6 +31,9 @@ class _BodyState extends State<Body> {
         .of(context)
         .size;
     return Background(
+      child: SingleChildScrollView(
+        reverse: true,
+        padding: const EdgeInsets.all(15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -95,6 +98,7 @@ class _BodyState extends State<Body> {
               try{
                 final user = _auth.signInWithEmailAndPassword(email: emailID!, password: password!);
                 if(user != null){
+                  print('****************User in*********************');
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -126,6 +130,7 @@ class _BodyState extends State<Body> {
           ),
         ],
       ),
+    ),  ///////////////
 
     );
   }

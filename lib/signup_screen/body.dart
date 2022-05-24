@@ -87,11 +87,13 @@ class _BodyState extends State<Body> {
               color: kPrimaryColor,
               press: () async{
                 print("Name : "+name!+" "+email!+" "+password!);
-                try{
-                  final newUser = await _auth.createUserWithEmailAndPassword(email: email!, password: password!);
-                  if(newUser != null){
-                    postDetailsToFirestore();
-                    Navigator.push(
+                if (password == reTypePassword) {
+                  try {
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: email!, password: password!);
+                    if (newUser != null) {
+                      postDetailsToFirestore();
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
@@ -99,10 +101,14 @@ class _BodyState extends State<Body> {
                           },
                         ),
                       );
+                    }
+                  }
+                  catch (e) {
+                    print(e);
                   }
                 }
-                catch (e) {
-                  print(e);
+                else{
+
                 }
     },
               length: size.width * 0.4,
@@ -160,6 +166,6 @@ class _BodyState extends State<Body> {
     .collection("User")
     .doc(user.uid)
     .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account Creater Sucessfully");
+    Fluttertoast.showToast(msg: "Account Create Sucessfully");
   }
 }
