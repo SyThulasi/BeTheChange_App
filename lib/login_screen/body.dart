@@ -11,7 +11,7 @@ import 'package:be_the_change/componnents/rounded_button.dart';
 import 'package:be_the_change/login_screen/login_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../constants.dart';
-
+import 'package:be_the_change/services/firebase_auth_methods.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -25,6 +25,10 @@ class _BodyState extends State<Body> {
   String? password;
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
+
+  void logInUser(){
+    FirebaseAuthMethods(FirebaseAuth.instance).logInWithEmail(email: emailID!, password: password!, context: context);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -57,17 +61,6 @@ class _BodyState extends State<Body> {
             hintText: "Your Email",
             onChanged: (value) {
               emailID = value;
-              validator:
-                  (value) {
-                if (value!.isEmpty) {
-                  return ("Please Enter your Email");
-                }
-                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                    .hasMatch(value)) {
-                  return ("Please Enter a valid email");
-                }
-                return null;
-              };
             },
             icon: Icons.mail,
           ),
@@ -93,10 +86,8 @@ class _BodyState extends State<Body> {
             text: "LOGIN",
             color: kPrimaryColor,
             press: () {
-              print("***************************************************");
-              print(emailID);
-              print(password);
-              Navigator.pushNamed(context, BlankScreen().id);
+              logInUser();
+              //Navigator.pushNamed(context, BlankScreen().id);
             },
             length: size.width * 0.4,
           ),
@@ -106,7 +97,7 @@ class _BodyState extends State<Body> {
           ),
         ],
       ),
-    ),  ///////////////
+    ),
 
     );
   }

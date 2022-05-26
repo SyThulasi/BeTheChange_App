@@ -14,19 +14,39 @@ class FirebaseAuthMethods {
     required BuildContext context,
   }) async{
      try{
-       print("***************************************");
        await _auth.createUserWithEmailAndPassword(email: email, password: password);
-       print("***************************************2");
+       await sendEmailVerification(context);
      }
      on FirebaseAuthException catch (e){
-       print("***************************************1");
        print(e.message);
-       if (e.code == 'weak-password') {
-         print('The password provided is too weak.');
-       } else if (e.code == 'email-already-in-use') {
-         print('The account already exists for that email.');
-       }
         showSnackBar(context, e.message!);
      }
+  }
+
+  Future<void> logInWithEmail({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
+    try{
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      if(!_auth.currentUser!.emailVerified){
+        await sendEmailVerification(context);
+      }
+    }
+    on FirebaseAuthException catch (e){
+      print(e.message);
+      showSnackBar(context, e.message!);
+    }
+  }
+
+  Future<void>sendEmailVerification(BuildContext context) async {
+    try{
+      _auth.currentUser!.sendEmailVerification();
+        showSnackBar(context, "Email Verification sent");
+    }
+    on FirebaseAuthException catch (e){
+      showSnackBar(context, e.message!);
+    }
   }
 }

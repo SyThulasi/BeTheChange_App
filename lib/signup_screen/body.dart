@@ -14,6 +14,7 @@ import 'package:be_the_change/screen/blank_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'userModel.dart';
 import 'package:be_the_change/services/firebase_auth_methods.dart';
+import 'package:be_the_change/utils/showSnackbar.dart';
 
 import '../constants.dart';
 import 'or_divider.dart';
@@ -94,20 +95,14 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "SIGN UP",
               color: kPrimaryColor,
-              press: signUpUser,
-              // press: () {
-              //   print("*********  "+ email! + "  "+ password!+"  ********");
-              //   signUpUser;
-              //   print("*********  "+ email! + "  "+ password!+"  ********");
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) {
-              //         return BlankScreen();
-              //       },
-              //     ),
-              //   );
-              // },
+              press: (){
+                if (password == reTypePassword){
+                  signUpUser();
+                }
+                else{
+                  showSnackBar(context, "Password doesn't match!");
+                }
+              },
               length: size.width * 0.4,
             ),
             SizedBox(height: size.height * 0.01),
