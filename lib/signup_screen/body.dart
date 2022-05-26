@@ -31,8 +31,7 @@ class _BodyState extends State<Body> {
   String? name, email, password, reTypePassword;
 
   void signUpUser() async{
-    print("***************************************");
-    FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(email: email!, password: password!,context: context);
+    FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(email: email!, password: password!,context: context, name: name!);
   }
 
 
