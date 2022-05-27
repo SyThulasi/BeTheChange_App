@@ -1,6 +1,7 @@
 import 'package:be_the_change/componnents/already_have_an_account_acheck.dart';
 import 'package:be_the_change/componnents/rounded_input_field.dart';
 import 'package:be_the_change/services/firebase_auth_methods.dart';
+import 'package:be_the_change/sign_Out_Page/sign_out.dart';
 import 'package:be_the_change/signup_screen/social_icon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -124,7 +125,8 @@ class _BodyState extends State<Body> {
                 SocalIcon(
                   iconSrc: "assets/icons/google.svg",
                   press: () {
-                    Navigator.pushNamed(context, BlankScreen().id);
+                    FirebaseAuthMethods(FirebaseAuth.instance).signInWithGoogle(context);
+                    Navigator.pushNamed(context, SignOutScreen().id);
                   },
                 ),
               ],
