@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:be_the_change/constants.dart';
 import 'package:be_the_change/login_screen/login_screen.dart';
+import 'package:be_the_change/sign_Out_Page/sign_out.dart';
 import 'package:flutter/material.dart';
 import 'package:be_the_change/welcome/background.dart';
 import 'package:be_the_change/componnents/rounded_button.dart';

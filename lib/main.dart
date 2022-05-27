@@ -1,5 +1,6 @@
 import 'package:be_the_change/login_screen/login_screen.dart';
 import 'package:be_the_change/screen/blank_screen.dart';
+import 'package:be_the_change/sign_Out_Page/sign_out.dart';
 import 'package:be_the_change/signup_screen/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
         WelcomeScreen().id : (context) => WelcomeScreen(),
         LoginScreen().id : (context) => LoginScreen(),
         SignUpScreen().id : (context) => SignUpScreen(),
-        BlankScreen().id : (context) => BlankScreen()
+        BlankScreen().id : (context) => BlankScreen(),
+        SignOutScreen().id : (context) => SignOutScreen(),
       },
     );
   }

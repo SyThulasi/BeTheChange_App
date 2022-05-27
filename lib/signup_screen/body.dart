@@ -2,18 +2,13 @@ import 'package:be_the_change/componnents/already_have_an_account_acheck.dart';
 import 'package:be_the_change/componnents/rounded_input_field.dart';
 import 'package:be_the_change/services/firebase_auth_methods.dart';
 import 'package:be_the_change/signup_screen/social_icon.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:be_the_change/welcome/background.dart';
 import 'package:be_the_change/componnents/rounded_password_field.dart';
 import 'package:be_the_change/componnents/rounded_button.dart';
-import 'package:be_the_change/login_screen/login_screen.dart';
 import 'package:be_the_change/screen/blank_screen.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'userModel.dart';
-import 'package:be_the_change/services/firebase_auth_methods.dart';
 import 'package:be_the_change/utils/showSnackbar.dart';
 
 import '../constants.dart';
@@ -113,21 +108,21 @@ class _BodyState extends State<Body> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                // SocalIcon(
+                //   iconSrc: "assets/icons/facebook.svg",
+                //   press: () {
+                //     Navigator.pushNamed(context, BlankScreen().id);
+                //   },
+                //
+                // ),
+                // SocalIcon(
+                //   iconSrc: "assets/icons/twitter.svg",
+                //   press: () {
+                //     Navigator.pushNamed(context, BlankScreen().id);
+                //   },
+                // ),
                 SocalIcon(
-                  iconSrc: "assets/icons/facebook.svg",
-                  press: () {
-                    Navigator.pushNamed(context, BlankScreen().id);
-                  },
-
-                ),
-                SocalIcon(
-                  iconSrc: "assets/icons/twitter.svg",
-                  press: () {
-                    Navigator.pushNamed(context, BlankScreen().id);
-                  },
-                ),
-                SocalIcon(
-                  iconSrc: "assets/icons/google-plus.svg",
+                  iconSrc: "assets/icons/google.svg",
                   press: () {
                     Navigator.pushNamed(context, BlankScreen().id);
                   },
