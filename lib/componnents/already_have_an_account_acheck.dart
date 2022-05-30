@@ -3,6 +3,7 @@ import 'package:be_the_change/constants.dart';
 
 import '../login_screen/login_screen.dart';
 import '../signup_screen/signup_screen.dart';
+import '../utils/custom_page_route.dart';
 
 class AlreadyHaveAnAccountCheck extends StatelessWidget {
   final bool login;
@@ -25,10 +26,12 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
         GestureDetector(
           onTap: () {
             if(login == true){
-              Navigator.pushNamed(context, SignUpScreen().id);
+              Navigator.of(context).push(
+                  CustomPageRoute(child: SignUpScreen(), transition: "slide left"));
             }
             else{
-              Navigator.pushNamed(context, LoginScreen().id);
+              Navigator.of(context).push(
+                  CustomPageRoute(child: LoginScreen(), transition: "slide left"));
             }
             },
           child: Text(

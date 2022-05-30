@@ -5,6 +5,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:be_the_change/constants.dart';
 import 'package:be_the_change/animated_welcome/background.dart';
 
+import '../utils/custom_page_route.dart';
+
 class AnimatedWelcomePage extends StatefulWidget {
 
   String id =  'AnimatedWelcomePage';
@@ -100,7 +102,8 @@ class _AnimatedWelcomePageState extends State<AnimatedWelcomePage> {
                         child: TextButton(
                           onPressed: () {
                             // reload the page
-                            Navigator.pushNamed(context, WelcomeScreen().id);
+                            Navigator.of(context).push(
+                                CustomPageRoute(child: WelcomeScreen(), transition: "slide left"));
                           },
                           child: const Text(
                             'Start >>',

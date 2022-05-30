@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:be_the_change/animated_welcome/animated_welcome_page.dart';
 import 'package:be_the_change/constants.dart';
 
+import '../login_screen/login_screen.dart';
+import '../utils/custom_page_route.dart';
+
 class SplashScreen extends StatefulWidget {
 
   String id =  'SplashScreen';
@@ -17,10 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         const Duration(seconds: 1),
-        () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>  AnimatedWelcomePage())));
+        () => Navigator.of(context).push(
+            CustomPageRoute(child: AnimatedWelcomePage(), transition: "slide left")));
   }
 
   @override
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                kPrimaryLightColor,
+                kPrimaryColor,
                 kPrimaryLightColor,
               ]),
         ),

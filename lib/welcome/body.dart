@@ -7,6 +7,8 @@ import 'package:be_the_change/welcome/background.dart';
 import 'package:be_the_change/componnents/rounded_button.dart';
 import 'package:be_the_change/signup_screen/signup_screen.dart';
 
+import '../utils/custom_page_route.dart';
+
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
@@ -75,7 +77,8 @@ class Body extends StatelessWidget {
               text: "Log In",
               length: size.width * 0.4,
               press: () {
-                Navigator.pushNamed(context, LoginScreen().id);
+                Navigator.of(context).push(
+                    CustomPageRoute(child: LoginScreen(), transition: "slide left"));
               },
               color: kPrimaryColor,
             ),
@@ -88,7 +91,8 @@ class Body extends StatelessWidget {
               length: size.width * 0.4,
               color: kPrimaryColor,
               press: () {
-                Navigator.pushNamed(context, SignUpScreen().id);
+                Navigator.of(context).push(
+                    CustomPageRoute(child: SignUpScreen(), transition: "slide left"));
               },
             ),
           ),

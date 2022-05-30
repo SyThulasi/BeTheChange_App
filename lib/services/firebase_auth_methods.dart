@@ -9,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../sign_Out_Page/sign_out.dart';
 import '../signup_screen/userModel.dart';
+import '../utils/custom_page_route.dart';
 
 class FirebaseAuthMethods {
 
@@ -26,7 +27,8 @@ class FirebaseAuthMethods {
        await _auth.createUserWithEmailAndPassword(email: email, password: password);
        postDetailsToFirestore(name);
        await sendEmailVerification(context);
-       Navigator.pushNamed(context, SignOutScreen().id);
+       Navigator.of(context).push(
+           CustomPageRoute(child: SignOutScreen(), transition: "slide left"));
      }
      on FirebaseAuthException catch (e){
        print(e.message);
@@ -44,7 +46,8 @@ class FirebaseAuthMethods {
       if(!_auth.currentUser!.emailVerified){
         await sendEmailVerification(context);
       }
-      Navigator.pushNamed(context, SignOutScreen().id);
+      Navigator.of(context).push(
+          CustomPageRoute(child: SignOutScreen(), transition: "slide left"));
     }
     on FirebaseAuthException catch (e){
       print(e.message);
@@ -85,7 +88,8 @@ class FirebaseAuthMethods {
   Future<void> SignOut(BuildContext context) async{
     try{
       await _auth.signOut();
-      Navigator.pushNamed(context, WelcomeScreen().id);
+      Navigator.of(context).push(
+          CustomPageRoute(child: WelcomeScreen(), transition: "slide left"));
     }
     on FirebaseAuthException catch (e){
       showSnackBar(context, e.message!);
@@ -127,6 +131,8 @@ class FirebaseAuthMethods {
           // }
         }
       }
+      Navigator.of(context).push(
+          CustomPageRoute(child: SignOutScreen(), transition: "slide left"));
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }

@@ -29,16 +29,17 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF0D1118),
         //scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: SplashScreen().id,
-      routes: {
-        SplashScreen().id : (context) =>  SplashScreen(),
-        AnimatedWelcomePage().id: (context) =>  AnimatedWelcomePage(),
-        WelcomeScreen().id : (context) => WelcomeScreen(),
-        LoginScreen().id : (context) => LoginScreen(),
-        SignUpScreen().id : (context) => SignUpScreen(),
-        BlankScreen().id : (context) => BlankScreen(),
-        SignOutScreen().id : (context) => SignOutScreen(),
-      },
+      home: SplashScreen(),
+      // initialRoute: SplashScreen().id,
+      // routes: {
+      //   SplashScreen().id : (context) =>  SplashScreen(),
+      //   AnimatedWelcomePage().id: (context) =>  AnimatedWelcomePage(),
+      //   WelcomeScreen().id : (context) => WelcomeScreen(),
+      //   LoginScreen().id : (context) => LoginScreen(),
+      //   SignUpScreen().id : (context) => SignUpScreen(),
+      //   BlankScreen().id : (context) => BlankScreen(),
+      //   SignOutScreen().id : (context) => SignOutScreen(),
+      // },
     );
   }
 }

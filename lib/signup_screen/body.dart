@@ -13,6 +13,7 @@ import 'package:be_the_change/screen/blank_screen.dart';
 import 'package:be_the_change/utils/showSnackbar.dart';
 
 import '../constants.dart';
+import '../utils/custom_page_route.dart';
 import 'or_divider.dart';
 
 class Body extends StatefulWidget {
@@ -126,7 +127,7 @@ class _BodyState extends State<Body> {
                   iconSrc: "assets/icons/google.svg",
                   press: () {
                     FirebaseAuthMethods(FirebaseAuth.instance).signInWithGoogle(context);
-                    Navigator.pushNamed(context, SignOutScreen().id);
+
                   },
                 ),
               ],
