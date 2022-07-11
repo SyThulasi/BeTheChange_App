@@ -8,8 +8,7 @@ import 'package:be_the_change/animated_welcome/background.dart';
 import '../utils/custom_page_route.dart';
 
 class AnimatedWelcomePage extends StatefulWidget {
-
-  String id =  'AnimatedWelcomePage';
+  String id = 'AnimatedWelcomePage';
 
   @override
   _AnimatedWelcomePageState createState() => _AnimatedWelcomePageState();
@@ -26,7 +25,7 @@ class _AnimatedWelcomePageState extends State<AnimatedWelcomePage> {
           children: [
             const SizedBox(height: 50),
             FadeInRight(
-              duration: const Duration(microseconds: 750),
+              duration: const Duration(microseconds: 800),
               // child: Image.network(
               //   'https://cdn.dribbble.com/users/2859475/screenshots/9841599/media/2d5bc73c42245d49f49db16343f69a64.gif',
               //   fit: BoxFit.cover,
@@ -102,8 +101,9 @@ class _AnimatedWelcomePageState extends State<AnimatedWelcomePage> {
                         child: TextButton(
                           onPressed: () {
                             // reload the page
-                            Navigator.of(context).push(
-                                CustomPageRoute(child: WelcomeScreen(), transition: "slide left"));
+                            Navigator.of(context).push(CustomPageRoute(
+                                child: WelcomeScreen(),
+                                transition: "slide left"));
                           },
                           child: const Text(
                             'Start >>',
